@@ -13,9 +13,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).canvasColor,
       appBar: _appbar(context),
       body: Container(
-        height: MediaQuery.of(context).size.height -
-            MediaQuery.of(context).padding.top +
-            250,
+        height: MediaQuery.of(context).size.height,
         child: _body(
           context,
         ),
@@ -110,7 +108,7 @@ class HomeScreen extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: 170,
+          width: 150,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(8),
@@ -120,11 +118,12 @@ class HomeScreen extends StatelessWidget {
           ),
           padding: EdgeInsets.symmetric(
             horizontal: 20,
-            vertical: 10,
+            vertical: 12,
           ),
-          child: _headline5Text(
+          child: _headline6Text(
             context,
             text: title,
+            boldText: true,
           ),
         ),
         Expanded(
@@ -196,9 +195,8 @@ class HomeScreen extends StatelessWidget {
       await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
   AppBar _appbar(BuildContext context) {
     return AppBar(
-      
       elevation: 0,
-      toolbarHeight: 250,
+      toolbarHeight: 260,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(15),
@@ -250,13 +248,12 @@ class HomeScreen extends StatelessWidget {
   }
 
   Text _headline6Text(BuildContext context,
-      {required String text, Color? color}) {
+      {required String text, Color? color, bool boldText = false}) {
     return Text(
       text,
-      style: Theme.of(context)
-          .textTheme
-          .headline6!
-          .copyWith(color: color ?? Colors.white, fontWeight: FontWeight.w600),
+      style: Theme.of(context).textTheme.headline6!.copyWith(
+          color: color ?? Colors.white,
+          fontWeight: boldText ? FontWeight.w600 : FontWeight.normal),
     );
   }
 
@@ -284,8 +281,8 @@ class HomeScreen extends StatelessWidget {
 
   Container _userImage(BuildContext context) {
     return Container(
-      height: 80,
-      width: 80,
+      height: 90,
+      width: 90,
       decoration: BoxDecoration(
         border: Border.all(
           width: 3,
