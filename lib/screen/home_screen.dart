@@ -1,4 +1,6 @@
-import 'package:bio_app/screen/url-constant.dart';
+import 'package:bio_app/screen/offline_courses.dart';
+import 'package:bio_app/screen/url_constant.dart';
+import 'package:bio_app/screen/web_view_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,6 +11,57 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawerEnableOpenDragGesture: true,
+      drawer: Drawer(
+        child: Container(
+          child: ListView(
+            children: [
+              Container(
+                height: 70,
+                child: DrawerHeader(
+                  decoration: BoxDecoration(),
+                  child: Text(
+                    "Assignments".toUpperCase(),
+                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ),
+              ),
+              _drawerTile(context,
+                  icon: Icons.library_books, text: "Medium Webview", onTap: () {
+                Navigator.pushNamed(context, WebviewScreen.routeName,
+                    arguments: "https://medium.com/");
+              }),
+              Divider(
+                color: Colors.grey.shade300,
+                height: 0,
+              ),
+              _drawerTile(context,
+                  icon: Icons.shopping_bag,
+                  text: "Ecommerce Website", onTap: () {
+                Navigator.pushNamed(context, WebviewScreen.routeName,
+                    arguments: "https://www.zappos.com/");
+              }),
+              Divider(
+                color: Colors.grey.shade300,
+                height: 0,
+              ),
+              _drawerTile(context,
+                  icon: Icons.shopping_bag, text: "Offline Courses", onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  OfflineCoursesScreen.routeName,
+                );
+              }),
+              Divider(
+                color: Colors.grey.shade300,
+                height: 0,
+              ),
+            ],
+          ),
+        ),
+      ),
       extendBodyBehindAppBar: true,
       backgroundColor: Theme.of(context).canvasColor,
       appBar: _appbar(context),
@@ -18,6 +71,24 @@ class HomeScreen extends StatelessWidget {
           context,
         ),
       ),
+    );
+  }
+
+  ListTile _drawerTile(BuildContext context,
+      {required IconData icon,
+      required String text,
+      required void Function() onTap}) {
+    return ListTile(
+      leading: Icon(
+        icon,
+        color: Theme.of(context).primaryColor,
+        size: 30,
+      ),
+      title: Text(
+        text,
+        style: Theme.of(context).textTheme.subtitle1,
+      ),
+      onTap: onTap,
     );
   }
 
@@ -126,7 +197,8 @@ class HomeScreen extends StatelessWidget {
             boldText: true,
           ),
         ),
-        Expanded(
+        SizedBox(
+          width: MediaQuery.of(context).size.width - 150,
           child: Divider(
             color: Theme.of(context).primaryColorDark,
             thickness: 1.5,
@@ -137,46 +209,43 @@ class HomeScreen extends StatelessWidget {
   }
 
   _followMe(context) {
-    return Expanded(
-      child: Container(
-        height: 300,
-        child: Column(
-          children: [
-            _legendTitle(context, title: "Follow Me"),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _logo("assets/logos/linkedIn.png",
-                          url: "https://np.linkedin.com/in/nirajkaranjeet"),
-                      _logo("assets/logos/twitter.png",
-                          url: "https://twitter.com/nischa68"),
-                      _logo("assets/logos/instagram.png",
-                          url: "https://www.instagram.com/nischalkat/"),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _logo("assets/logos/facebook.png",
-                          url: "https://www.facebook.com/Nischal.Karanjeet"),
-                      _logo("assets/logos/tiktok.png",
-                          url: "https://tiktok.com"),
-                      _logo("assets/logos/github.png",
-                          url: "https://github.com/nischal08"),
-                    ],
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
+    return Container(
+      height: 300,
+      child: Column(
+        children: [
+          _legendTitle(context, title: "Follow Me"),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _logo("assets/logos/linkedIn.png",
+                        url: "https://np.linkedin.com/in/nirajkaranjeet"),
+                    _logo("assets/logos/twitter.png",
+                        url: "https://twitter.com/nischa68"),
+                    _logo("assets/logos/instagram.png",
+                        url: "https://www.instagram.com/nischalkat/"),
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _logo("assets/logos/facebook.png",
+                        url: "https://www.facebook.com/Nischal.Karanjeet"),
+                    _logo("assets/logos/tiktok.png", url: "https://tiktok.com"),
+                    _logo("assets/logos/github.png",
+                        url: "https://github.com/nischal08"),
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
@@ -193,6 +262,7 @@ class HomeScreen extends StatelessWidget {
 
   void _launchURL(url) async =>
       await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+
   AppBar _appbar(BuildContext context) {
     return AppBar(
       elevation: 0,
@@ -203,12 +273,17 @@ class HomeScreen extends StatelessWidget {
           bottomRight: Radius.circular(15),
         ),
       ),
-      leading: Container(
-        padding: EdgeInsets.all(14),
-        alignment: Alignment.topLeft,
-        child: Icon(
-          Icons.menu_rounded,
-          size: 34,
+      leading: Builder(
+        builder: (context) => GestureDetector(
+          onTap: () => Scaffold.of(context).openDrawer(),
+          child: Container(
+            padding: EdgeInsets.all(14),
+            alignment: Alignment.topLeft,
+            child: Icon(
+              Icons.menu_rounded,
+              size: 34,
+            ),
+          ),
         ),
       ),
       centerTitle: true,
