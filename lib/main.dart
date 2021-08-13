@@ -1,5 +1,6 @@
 import 'package:bio_app/screen/home_screen.dart';
 import 'package:bio_app/screen/offline_courses.dart';
+import 'package:bio_app/screen/pdf_viewer.dart';
 import 'package:bio_app/screen/web_view_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       home: HomeScreen(),
       routes: {
         WebviewScreen.routeName: (context) => WebviewScreen(),
-        OfflineCoursesScreen.routeName:(context)=>OfflineCoursesScreen()
+        OfflineCoursesScreen.routeName:(context)=>OfflineCoursesScreen(),
+        PdfViewer.routeName:(context)=>PdfViewer()
       },
     );
   }

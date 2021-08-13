@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bio_app/screen/pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -26,7 +27,7 @@ class _OfflineCoursesScreenState extends State<OfflineCoursesScreen> {
   void initState() {
     super.initState();
 
-    getFileFromAsset("assets/example.pdf").then((f) {
+    getFileFromAsset("assets/pdf/example.pdf").then((f) {
       setState(() {
         assetPDFPath = f.path;
       });
@@ -53,6 +54,7 @@ class _OfflineCoursesScreenState extends State<OfflineCoursesScreen> {
         title: Text("Offline Courses"),
       ),
       body: Container(
+        padding: EdgeInsets.only(top: 10),
         alignment: Alignment.center,
         child: ListView.builder(
           itemCount: _courseList.length,
@@ -65,15 +67,22 @@ class _OfflineCoursesScreenState extends State<OfflineCoursesScreen> {
 
   Card _courseTile(BuildContext context, {required String text}) {
     return Card(
+      elevation: 2,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: InkWell(
-        onTap: () {},
+        onTap: () =>Navigator.of(context).pushNamed(PdfViewer.routeName,arguments: assetPDFPath),
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(12.0),
           child: SizedBox(
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.headline6,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  text,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                Icon(Icons.arrow_forward_ios)
+              ],
             ),
           ),
         ),

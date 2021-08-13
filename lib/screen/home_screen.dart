@@ -13,53 +13,49 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       drawerEnableOpenDragGesture: true,
       drawer: Drawer(
-        child: Container(
-          child: ListView(
-            children: [
-              Container(
-                height: 70,
-                child: DrawerHeader(
-                  decoration: BoxDecoration(),
-                  child: Text(
-                    "Assignments".toUpperCase(),
-                    style: Theme.of(context).textTheme.headline6!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
+        child: ListView(
+          children: [
+            Container(
+              height: 70,
+              child: DrawerHeader(
+                child: Text(
+                  "Assignments".toUpperCase(),
+                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
-              _drawerTile(context,
-                  icon: Icons.library_books, text: "Medium Webview", onTap: () {
-                Navigator.pushNamed(context, WebviewScreen.routeName,
-                    arguments: "https://medium.com/");
-              }),
-              Divider(
-                color: Colors.grey.shade300,
-                height: 0,
-              ),
-              _drawerTile(context,
-                  icon: Icons.shopping_bag,
-                  text: "Ecommerce Website", onTap: () {
-                Navigator.pushNamed(context, WebviewScreen.routeName,
-                    arguments: "https://www.zappos.com/");
-              }),
-              Divider(
-                color: Colors.grey.shade300,
-                height: 0,
-              ),
-              _drawerTile(context,
-                  icon: Icons.shopping_bag, text: "Offline Courses", onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  OfflineCoursesScreen.routeName,
-                );
-              }),
-              Divider(
-                color: Colors.grey.shade300,
-                height: 0,
-              ),
-            ],
-          ),
+            ),
+            _drawerTile(context,
+                icon: Icons.library_books, text: "Medium Webview", onTap: () {
+              Navigator.pushNamed(context, WebviewScreen.routeName,
+                  arguments: "https://medium.com/");
+            }),
+            Divider(
+              color: Colors.grey.shade300,
+              height: 0,
+            ),
+            _drawerTile(context,
+                icon: Icons.shopping_bag, text: "Ecommerce Website", onTap: () {
+              Navigator.pushNamed(context, WebviewScreen.routeName,
+                  arguments: "https://www.zappos.com/");
+            }),
+            Divider(
+              color: Colors.grey.shade300,
+              height: 0,
+            ),
+            _drawerTile(context,
+                icon: Icons.auto_stories, text: "Offline Courses", onTap: () {
+              Navigator.pushNamed(
+                context,
+                OfflineCoursesScreen.routeName,
+              );
+            }),
+            Divider(
+              color: Colors.grey.shade300,
+              height: 0,
+            ),
+          ],
         ),
       ),
       extendBodyBehindAppBar: true,
@@ -181,6 +177,14 @@ class HomeScreen extends StatelessWidget {
         Container(
           width: 150,
           decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 1,
+                color: Colors.grey,
+                offset: Offset(2, 2),
+                spreadRadius: 1,
+              ),
+            ],
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(8),
               bottomRight: Radius.circular(8),
@@ -265,7 +269,7 @@ class HomeScreen extends StatelessWidget {
 
   AppBar _appbar(BuildContext context) {
     return AppBar(
-      elevation: 0,
+      elevation: 4,
       toolbarHeight: 260,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
