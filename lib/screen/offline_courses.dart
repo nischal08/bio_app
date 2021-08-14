@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bio_app/screen/pdf_viewer.dart';
+import 'package:bio_app/screen/course_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -58,33 +58,10 @@ class _OfflineCoursesScreenState extends State<OfflineCoursesScreen> {
         alignment: Alignment.center,
         child: ListView.builder(
           itemCount: _courseList.length,
-          itemBuilder: (context, index) =>
-              _courseTile(context, text: _courseList[index]),
-        ),
-      ),
-    );
-  }
-
-  Card _courseTile(BuildContext context, {required String text}) {
-    return Card(
-      elevation: 2,
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: InkWell(
-        onTap: () =>Navigator.of(context).pushNamed(PdfViewer.routeName,arguments: assetPDFPath),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: SizedBox(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  text,
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                Icon(Icons.arrow_forward_ios)
-              ],
-            ),
-          ),
+          itemBuilder: (context, index) => CourseTile(
+              assetPDFPath: assetPDFPath,
+              context: context,
+              text: _courseList[index]),
         ),
       ),
     );
