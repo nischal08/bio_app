@@ -16,7 +16,7 @@ late  Timer timer;
   void initState() {
     super.initState();
      timer = Timer(
-      Duration(seconds: 2),
+      Duration(seconds: 3),
       () => Navigator.pushReplacementNamed(context, HomeScreen.routeName),
     );
   }
