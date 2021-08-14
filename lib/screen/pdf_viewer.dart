@@ -62,12 +62,6 @@ class _PdfViewerState extends State<PdfViewer> {
                     onPageError: (page, error) {
                       print('$page: ${error.toString()}');
                     },
-                    // onViewCreated: (PDFViewController pdfViewController) {
-                    //   _controller.complete(pdfViewController);
-                    // },
-                    // onPageChanged: (int page, int total) {
-                    //   print('page change: $page/$total');
-                    // },
                   ),
                 ),
                 Container(
@@ -76,7 +70,7 @@ class _PdfViewerState extends State<PdfViewer> {
                   child: Text(
                     "Double tap or use finger gesture to zoom",
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                        color: _visible ? Colors.black : Colors.white),
+                        color: _visible ? Colors.black : Colors.transparent),
                   ),
                 )
               ],
@@ -85,7 +79,7 @@ class _PdfViewerState extends State<PdfViewer> {
           Text(
             "page $currentPage",
             style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                  color: path.contains("cv") ? Colors.white : Colors.black,
+                  color: path.contains("cv") ? Colors.transparent : Colors.black,
                 ),
           ),
           SizedBox(
