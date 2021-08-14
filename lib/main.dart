@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.red, canvasColor: Colors.white),
       home: HomeScreen(),
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         OfflineCoursesScreen.routeName:(context)=>OfflineCoursesScreen(),
         PdfViewer.routeName:(context)=>PdfViewer(),
         WebMenuScreen.routeName:(context)=>WebMenuScreen(),
-        
+
       },
     );
   }

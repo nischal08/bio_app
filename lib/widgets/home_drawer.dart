@@ -4,7 +4,7 @@ import 'package:bio_app/screen/website-menus_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer({Key? key}) : super(key: key);
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +30,8 @@ class MainDrawer extends StatelessWidget {
           color: Colors.grey.shade300,
           height: 0,
         ),
-        _drawerTile(context,
-            icon: Icons.shopping_bag, text: "Esty Ecommerce", onTap: () {
+        _drawerTile(context, icon: Icons.shopping_bag, text: "Esty Ecommerce",
+            onTap: () {
           Navigator.pushNamed(
             context,
             WebMenuScreen.routeName,
