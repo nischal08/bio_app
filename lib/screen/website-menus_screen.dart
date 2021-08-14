@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:bio_app/constant/url_constant.dart';
 import 'package:bio_app/widgets/menu_item.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class WebMenuScreen extends StatelessWidget {
     {"Vintage": "vintage"},
   ];
   final _random = Random();
-  String baseUrl = "https://www.etsy.com/c/";
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +26,8 @@ class WebMenuScreen extends StatelessWidget {
         title: Text("Esty Menu"),
       ),
       body: GridView.builder(
+        addAutomaticKeepAlives: true,
+        shrinkWrap: true,
         padding: EdgeInsets.all(20),
         itemCount: menuList.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -38,7 +41,7 @@ class WebMenuScreen extends StatelessWidget {
           color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
                   [_random.nextInt(9) * 100] ??
               Theme.of(context).primaryColor,
-          url: "$baseUrl${menuList[index].values.first}",
+          url: "$baseUrlEsty${menuList[index].values.first}",
         ),
       ),
     );

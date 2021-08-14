@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'pdf_viewer.dart';
+import '../screen/pdf_viewer.dart';
 
 class CourseTile extends StatelessWidget {
   const CourseTile({

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bio_app/screen/course_tile.dart';
+import 'package:bio_app/widgets/course_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
