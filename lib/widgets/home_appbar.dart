@@ -5,8 +5,8 @@ import 'reusable_widgets.dart';
 
 class MainAppbar extends StatelessWidget {
   final String assetPDFPath;
-
-  const MainAppbar({Key? key, required this.assetPDFPath}) : super(key: key);
+  const MainAppbar({Key? key, required this.assetPDFPath})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

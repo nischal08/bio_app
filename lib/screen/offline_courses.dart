@@ -1,10 +1,8 @@
-import 'dart:io';
 import 'dart:math';
-
+import 'package:bio_app/controller.dart/data.dart';
 import 'package:bio_app/widgets/course_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 
 class OfflineCoursesScreen extends StatefulWidget {
   OfflineCoursesScreen({Key? key}) : super(key: key);
@@ -15,37 +13,18 @@ class OfflineCoursesScreen extends StatefulWidget {
 
 class _OfflineCoursesScreenState extends State<OfflineCoursesScreen> {
   String assetPDFPath = "";
-  List<String> _courseList = [
-    "Microproccessor",
-    "Discrete Structure",
-    "Java Programming",
-    "Compiler",
-    "Calculus",
-    "Real Time System"
-  ];
-
+ 
   @override
   void initState() {
     super.initState();
 
-    getFileFromAsset("assets/pdf/example.pdf").then((f) {
+    Provider.of<Data>(context, listen: false)
+        .getFileFromAsset(asset: "assets/pdf/example.pdf", fileName: "syllabus.pdf")
+        .then((f) {
       setState(() {
         assetPDFPath = f.path;
       });
     });
-  }
-
-  Future<File> getFileFromAsset(String asset) async {
-    try {
-      var data = await rootBundle.load(asset);
-      var bytes = data.buffer.asUint8List();
-      var dir = await getApplicationDocumentsDirectory();
-      File file = File("${dir.path}/mypdf.pdf");
-      File assetFile = await file.writeAsBytes(bytes);
-      return assetFile;
-    } catch (e) {
-      throw Exception("Error opening asset file");
-    }
   }
 
   final _random = Random();
@@ -55,18 +34,21 @@ class _OfflineCoursesScreenState extends State<OfflineCoursesScreen> {
       appBar: AppBar(
         title: Text("Offline Courses"),
       ),
-      body: Container(
-        padding: EdgeInsets.only(top: 10),
-        alignment: Alignment.center,
-        child: ListView.builder(
-          itemCount: _courseList.length,
-          itemBuilder: (context, index) => CourseTile(
-              color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
-                      [_random.nextInt(7) * 100] ??
-                  Theme.of(context).primaryColor,
-              assetPDFPath: assetPDFPath,
-              context: context,
-              text: _courseList[index]),
+      body: Consumer<Data>( 
+        builder: (__, data, _) => 
+         Container(
+          padding: EdgeInsets.only(top: 10),
+          alignment: Alignment.center,
+          child: ListView.builder(
+            itemCount: data.courseList.length,
+            itemBuilder: (context, index) => CourseTile(
+                color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
+                        [_random.nextInt(7) * 100] ??
+                    Theme.of(context).primaryColor,
+                assetPDFPath: assetPDFPath,
+                context: context,
+                text: data.courseList[index]),
+          ),
         ),
       ),
     );

@@ -6,13 +6,12 @@ import 'package:bio_app/widgets/home_drawer.dart';
 import 'package:bio_app/widgets/reusable_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
-
+  static const routeName = "/home";
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -24,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     Provider.of<Data>(context, listen: false)
-        .getFileFromAsset("assets/pdf/cv.pdf")
+        .getFileFromAsset(asset: "assets/pdf/cv.pdf", fileName: "cv.pdf")
         .then((f) {
       setState(() {
         assetPDFPath = f.path;
@@ -180,8 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   _followMe(context) {
     return Consumer<Data>(
-      builder: (__, data, _) => 
-       Container(
+      builder: (__, data, _) => Container(
         height: 300,
         child: Column(
           children: [

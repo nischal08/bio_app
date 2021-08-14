@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 
@@ -11,18 +13,24 @@ class PdfViewer extends StatefulWidget {
 class _PdfViewerState extends State<PdfViewer> {
   int currentPage = 0;
   bool _visible = true;
+  late Timer timer;
   @override
   void initState() {
-    // TODO: implement initState
-    Future.delayed(
+    super.initState();
+    timer = Timer(
         Duration(
           seconds: 3,
         ), () {
-      setState(() {
-        _visible = false;
-      });
+      _visible = false;
+      setState(() {});
     });
-    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    timer.cancel();
   }
 
   @override
@@ -62,12 +70,13 @@ class _PdfViewerState extends State<PdfViewer> {
                     // },
                   ),
                 ),
-             if(_visible)   Container(
-               padding: EdgeInsets.only(top: 20),
+                Container(
+                  padding: EdgeInsets.only(top: 20),
                   alignment: Alignment.topCenter,
                   child: Text(
                     "Double tap or use finger gesture to zoom",
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: _visible ? Colors.black : Colors.white),
                   ),
                 )
               ],
@@ -75,10 +84,12 @@ class _PdfViewerState extends State<PdfViewer> {
           ),
           Text(
             "page $currentPage",
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                  color: path.contains("cv") ? Colors.white : Colors.black,
+                ),
           ),
           SizedBox(
-            height: 20,
+            height: 40,
           )
         ],
       ),
