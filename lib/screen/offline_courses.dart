@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:bio_app/widgets/course_tile.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,7 @@ class _OfflineCoursesScreenState extends State<OfflineCoursesScreen> {
     }
   }
 
+  final _random = Random();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +61,9 @@ class _OfflineCoursesScreenState extends State<OfflineCoursesScreen> {
         child: ListView.builder(
           itemCount: _courseList.length,
           itemBuilder: (context, index) => CourseTile(
+              color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
+                      [_random.nextInt(9) * 100] ??
+                  Theme.of(context).primaryColor,
               assetPDFPath: assetPDFPath,
               context: context,
               text: _courseList[index]),

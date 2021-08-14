@@ -16,14 +16,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.red, canvasColor: Colors.white),
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+        canvasColor: Colors.white,
+        accentColor: Colors.amberAccent
+      ),
       home: HomeScreen(),
       routes: {
         WebviewScreen.routeName: (context) => WebviewScreen(),
-        OfflineCoursesScreen.routeName:(context)=>OfflineCoursesScreen(),
-        PdfViewer.routeName:(context)=>PdfViewer(),
-        WebMenuScreen.routeName:(context)=>WebMenuScreen(),
-
+        OfflineCoursesScreen.routeName: (context) => OfflineCoursesScreen(),
+        PdfViewer.routeName: (context) => PdfViewer(),
+        WebMenuScreen.routeName: (context) => WebMenuScreen(),
       },
     );
   }

@@ -1,9 +1,6 @@
 import 'package:bio_app/constant/url_constant.dart';
 import 'package:bio_app/screen/pdf_viewer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:path_provider/path_provider.dart';
-
 import 'reusable_widgets.dart';
 
 class MainAppbar extends StatelessWidget {
@@ -61,6 +58,12 @@ class MainAppbar extends StatelessWidget {
                 children: [
                   subtitleText(context, text: "Age : 24"),
                   ElevatedButton.icon(
+                    style: ButtonStyle(
+                      elevation: MaterialStateProperty.all<double>(0),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        Colors.transparent,
+                      ),
+                    ),
                     onPressed: () {
                       Navigator.pushNamed(context, PdfViewer.routeName,
                           arguments: assetPDFPath);

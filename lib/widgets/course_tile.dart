@@ -8,15 +8,18 @@ class CourseTile extends StatelessWidget {
     required this.assetPDFPath,
     required this.context,
     required this.text,
+    required this.color,
   }) : super(key: key);
 
   final String assetPDFPath;
   final BuildContext context;
   final String text;
-
+  final Color? color;
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: color ??
+          Theme.of(context).primaryColor,
       elevation: 2,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: InkWell(
