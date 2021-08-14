@@ -31,7 +31,7 @@ List<Map<String, String>> _socialInfo = [
         child: MainAppbar(),
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height,
+        height: double.infinity,
         child: _body(
           context,
         ),

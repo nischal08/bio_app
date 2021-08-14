@@ -1,5 +1,6 @@
 import 'package:bio_app/screen/offline_courses.dart';
 import 'package:bio_app/screen/web_view_screen.dart';
+import 'package:bio_app/screen/website-menus_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -20,7 +21,7 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
         ),
-        _drawerTile(context, icon: Icons.library_books, text: "Medium Webview",
+        _drawerTile(context, icon: Icons.library_books, text: "Medium",
             onTap: () {
           Navigator.pushNamed(context, WebviewScreen.routeName,
               arguments: "https://medium.com/");
@@ -30,9 +31,11 @@ class MainDrawer extends StatelessWidget {
           height: 0,
         ),
         _drawerTile(context,
-            icon: Icons.shopping_bag, text: "Ecommerce Website", onTap: () {
-          Navigator.pushNamed(context, WebviewScreen.routeName,
-              arguments: "https://www.zappos.com/");
+            icon: Icons.shopping_bag, text: "Esty Ecommerce", onTap: () {
+          Navigator.pushNamed(
+            context,
+            WebMenuScreen.routeName,
+          );
         }),
         Divider(
           color: Colors.grey.shade300,

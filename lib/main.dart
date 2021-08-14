@@ -2,6 +2,7 @@ import 'package:bio_app/screen/home_screen.dart';
 import 'package:bio_app/screen/offline_courses.dart';
 import 'package:bio_app/screen/pdf_viewer.dart';
 import 'package:bio_app/screen/web_view_screen.dart';
+import 'package:bio_app/screen/website-menus_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,7 +20,9 @@ class MyApp extends StatelessWidget {
       routes: {
         WebviewScreen.routeName: (context) => WebviewScreen(),
         OfflineCoursesScreen.routeName:(context)=>OfflineCoursesScreen(),
-        PdfViewer.routeName:(context)=>PdfViewer()
+        PdfViewer.routeName:(context)=>PdfViewer(),
+        WebMenuScreen.routeName:(context)=>WebMenuScreen(),
+        
       },
     );
   }
