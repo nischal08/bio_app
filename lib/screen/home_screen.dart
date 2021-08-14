@@ -1,11 +1,13 @@
 import 'dart:io';
 
+import 'package:bio_app/controller.dart/data.dart';
 import 'package:bio_app/widgets/home_appbar.dart';
 import 'package:bio_app/widgets/home_drawer.dart';
 import 'package:bio_app/widgets/reusable_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,37 +18,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Map<String, String>> _socialInfo = [
-    {"assets/logos/linkedIn.png": "https://np.linkedin.com/in/nirajkaranjeet"},
-    {"assets/logos/twitter.png": "https://twitter.com/nischa68"},
-    {"assets/logos/instagram.png": "https://www.instagram.com/nischalkat/"},
-    {"assets/logos/facebook.png": "https://www.facebook.com/Nischal.Karanjeet"},
-    {"assets/logos/tiktok.png": "https://tiktok.com"},
-    {"assets/logos/github.png": "https://github.com/nischal08"}
-  ];
   String assetPDFPath = "";
   @override
   void initState() {
     super.initState();
 
-    getFileFromAsset("assets/pdf/cv.pdf").then((f) {
+    Provider.of<Data>(context, listen: false)
+        .getFileFromAsset("assets/pdf/cv.pdf")
+        .then((f) {
       setState(() {
         assetPDFPath = f.path;
       });
     });
-  }
-
-  Future<File> getFileFromAsset(String asset) async {
-    try {
-      var data = await rootBundle.load(asset);
-      var bytes = data.buffer.asUint8List();
-      var dir = await getApplicationDocumentsDirectory();
-      File file = File("${dir.path}/cv.pdf");
-      File assetFile = await file.writeAsBytes(bytes);
-      return assetFile;
-    } catch (e) {
-      throw Exception("Error opening asset file");
-    }
   }
 
   @override
@@ -196,33 +179,36 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   _followMe(context) {
-    return Container(
-      height: 300,
-      child: Column(
-        children: [
-          _legendTitle(context, title: "Follow Me"),
-          SizedBox(
-            height: 20,
-          ),
-          Flexible(
-            child: Container(
-              child: GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: _socialInfo.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  childAspectRatio: 16 / 9,
-                  crossAxisSpacing: 40,
-                  mainAxisSpacing: 40,
-                ),
-                itemBuilder: (context, index) => _logo(
-                  _socialInfo[index].keys.first,
-                  url: _socialInfo[index].values.first,
+    return Consumer<Data>(
+      builder: (__, data, _) => 
+       Container(
+        height: 300,
+        child: Column(
+          children: [
+            _legendTitle(context, title: "Follow Me"),
+            SizedBox(
+              height: 20,
+            ),
+            Flexible(
+              child: Container(
+                child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: data.socialInfo.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 16 / 9,
+                    crossAxisSpacing: 40,
+                    mainAxisSpacing: 40,
+                  ),
+                  itemBuilder: (context, index) => _logo(
+                    data.socialInfo[index].keys.first,
+                    url: data.socialInfo[index].values.first,
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -62,7 +62,7 @@ class _OfflineCoursesScreenState extends State<OfflineCoursesScreen> {
           itemCount: _courseList.length,
           itemBuilder: (context, index) => CourseTile(
               color: Colors.primaries[_random.nextInt(Colors.primaries.length)]
-                      [_random.nextInt(9) * 100] ??
+                      [_random.nextInt(7) * 100] ??
                   Theme.of(context).primaryColor,
               assetPDFPath: assetPDFPath,
               context: context,

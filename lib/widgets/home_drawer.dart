@@ -4,8 +4,6 @@ import 'package:bio_app/screen/website-menus_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
- 
-
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -15,9 +13,9 @@ class MainDrawer extends StatelessWidget {
           child: DrawerHeader(
             child: Text(
               "Assignments".toUpperCase(),
-              style: Theme.of(context).textTheme.headline6!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: Theme.of(context).textTheme.headline5!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).primaryColor),
             ),
           ),
         ),
@@ -65,6 +63,10 @@ class MainDrawer extends StatelessWidget {
         icon,
         color: Theme.of(context).primaryColor,
         size: 30,
+      ),
+      trailing: Icon(
+        Icons.arrow_forward_ios,
+        color: Theme.of(context).primaryColor,
       ),
       title: Text(
         text,
