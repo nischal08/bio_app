@@ -12,7 +12,7 @@ class MainDrawer extends StatelessWidget {
           height: 70,
           child: DrawerHeader(
             child: Text(
-              "Assignments".toUpperCase(),
+              "Projects".toUpperCase(),
               style: Theme.of(context).textTheme.headline5!.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).primaryColor),

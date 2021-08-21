@@ -74,10 +74,14 @@ class MainAppbar extends StatelessWidget {
   }
 
   Row _profileInfo(BuildContext context) {
+    DateTime birthdate= DateTime.parse("1997-11-14");
+    DateTime dateTimeNow=DateTime.now();
+    final differenceInYears=(dateTimeNow.difference(birthdate).inDays/365).toStringAsFixed(0);
+    print(differenceInYears);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        subtitleText(context, text: "Age : 24",),
+        subtitleText(context, text: "Age : $differenceInYears",),
         ElevatedButton.icon(
           style: ButtonStyle(
             elevation: MaterialStateProperty.all<double>(0),
